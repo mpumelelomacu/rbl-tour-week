@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RB Leipzig Tour Week — Roles & Schedule</title>
+<style>
+  :root {
+    --rb-red: #CC0000;
+    --rb-dark: #0A0A0A;
+    --rb-navy: #111827;
+    --rb-card: #1a1f2e;
+    --rb-border: #2a3244;
+    --rb-text: #e2e8f0;
+    --rb-muted: #94a3b8;
+    --rb-yellow: #f59e0b;
+    --rb-green: #10b981;
+    --rb-blue: #3b82f6;
+    --rb-purple: #8b5cf6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--rb-dark); color: var(--rb-text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.6; }
+
+  /* HEADER */
+  .site-header { background: linear-gradient(135deg,#0a0a0a 0%,#1a0000 50%,#0a0a0a 100%); border-bottom: 2px solid var(--rb-red); padding: 24px 40px; display: flex; align-items: center; gap: 16px; }
+  .rb-logo { width: 48px; height: 48px; background: var(--rb-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; color: #fff; flex-shrink: 0; letter-spacing: -1px; }
+  .header-text h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; color: #fff; text-transform: uppercase; }
+  .header-text p { color: var(--rb-muted); font-size: 11px; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* NAV */
+  .tab-nav { background: var(--rb-navy); border-bottom: 1px solid var(--rb-border); display: flex; gap: 4px; padding: 0 40px; overflow-x: auto; scrollbar-width: none; }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 13px 20px; background: none; border: none; border-bottom: 3px solid transparent; color: var(--rb-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; cursor: pointer; white-space: nowrap; transition: all .2s; }
+  .tab-btn:hover { color: var(--rb-text); }
+  .tab-btn.active { color: var(--rb-red); border-bottom-color: var(--rb-red); }
+
+  /* MAIN */
+  .main { padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* NOTES BANNER */
+  .notes-banner { background: #1c1008; border: 1px solid #7c4a00; border-left: 4px solid var(--rb-yellow); border-radius: 8px; padding: 14px 18px; margin-bottom: 28px; font-size: 13px; color: #fde68a; }
+  .notes-banner strong { color: var(--rb-yellow); text-transform: uppercase; font-size: 11px; letter-spacing: .8px; display: block; margin-bottom: 4px; }
+
+  /* DAY SECTION */
+  .day-section { margin-bottom: 40px; }
+  .day-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .day-pill { padding: 6px 16px; border-radius: 20px; font-weight: 800; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; }
+  .pill-tuesday    { background: #1e3a5f; border: 1px solid #3b6baa; }
+  .pill-wednesday  { background: #1e4d3d; border: 1px solid #2d7a5e; }
+  .pill-thursday   { background: #3d1e4d; border: 1px solid #7c4a9a; }
+  .pill-friday-pre { background: #4d3d1e; border: 1px solid #9a7c30; }
+  .pill-friday-ev  { background: #5c1a1a; border: 1px solid #cc3333; }
+  .pill-gameday    { background: #1a1a5c; border: 1px solid #3333cc; }
+  .day-line { flex: 1; height: 1px; background: var(--rb-border); }
+
+  /* TASK CARDS */
+  .tasks-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(340px,1fr)); gap: 14px; }
+  .task-card { background: var(--rb-card); border: 1px solid var(--rb-border); border-radius: 10px; overflow: hidden; transition: border-color .2s; }
+  .task-card:hover { border-color: #4a5568; }
+  .task-card-header { padding: 12px 16px 10px; border-bottom: 1px solid var(--rb-border); display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .task-title { font-weight: 700; font-size: 13px; color: #f1f5f9; line-height: 1.4; }
+  .task-time { background: #0f172a; border: 1px solid var(--rb-border); border-radius: 6px; padding: 3px 8px; font-size: 11px; color: var(--rb-yellow); white-space: nowrap; flex-shrink: 0; font-weight: 600; }
+  .task-body { padding: 12px 16px; display: grid; gap: 8px; }
+  .task-row { display: flex; gap: 10px; align-items: flex-start; }
+  .task-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--rb-muted); min-width: 80px; padding-top: 1px; flex-shrink: 0; }
+  .task-value { font-size: 12px; color: var(--rb-text); line-height: 1.5; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin: 2px 2px 2px 0; }
+  .tag-crew     { background: #1e3a5f; color: #93c5fd; border: 1px solid #2563eb30; }
+  .tag-creator  { background: #1e4d3d; color: #6ee7b7; border: 1px solid #10b98130; }
+  .tag-editor   { background: #3d1e4d; color: #c4b5fd; border: 1px solid #7c3aed30; }
+  .tag-deadline { background: #2a1f0f; color: #fcd34d; border: 1px solid #d9770630; }
+  .tag-rb       { background: #3a0f0f; color: #fca5a5; border: 1px solid #dc262630; }
+  .asset-list { font-size: 12px; color: #cbd5e1; }
+  .asset-list li { margin-bottom: 2px; padding-left: 4px; }
+  .notes-tag { background: #0f2a1e; border-left: 3px solid var(--rb-green); border-radius: 0 6px 6px 0; padding: 6px 10px; font-size: 11px; color: #86efac; margin-top: 4px; }
+
+  /* ROLES GRID */
+  .roles-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 16px; }
+  .role-card { background: var(--rb-card); border: 1px solid var(--rb-border); border-radius: 10px; overflow: hidden; cursor: pointer; transition: border-color .2s, transform .15s; text-decoration: none; display: block; }
+  .role-card:hover { border-color: var(--rb-red); transform: translateY(-2px); }
+  .role-header { padding: 14px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--rb-border); }
+  .role-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; color: #fff; }
+  .role-name { font-weight: 700; font-size: 14px; color: #f1f5f9; }
+  .role-title { font-size: 11px; color: var(--rb-muted); text-transform: uppercase; letter-spacing: .6px; margin-top: 1px; }
+  .role-arrow { margin-left: auto; color: var(--rb-muted); font-size: 18px; padding-left: 8px; }
+  .role-body { padding: 14px 18px; }
+  .day-duties { margin-bottom: 12px; }
+  .duty-day { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--rb-muted); margin-bottom: 5px; padding-bottom: 3px; border-bottom: 1px solid var(--rb-border); }
+  .duty-item { font-size: 12px; color: var(--rb-text); padding: 3px 0 3px 12px; position: relative; line-height: 1.4; }
+  .duty-item::before { content: '›'; position: absolute; left: 0; color: var(--rb-red); font-weight: 700; }
+  .role-tag { display: inline-block; font-size: 10px; font-weight: 600; color: var(--rb-muted); border: 1px solid var(--rb-border); border-radius: 4px; padding: 2px 6px; margin-top: 4px; }
+  .view-link { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--rb-red); font-weight: 600; letter-spacing: .5px; margin-top: 10px; }
+
+  /* Avatar colours */
+  .av-red    { background: #991b1b; }
+  .av-blue   { background: #1d4ed8; }
+  .av-green  { background: #065f46; }
+  .av-purple { background: #5b21b6; }
+  .av-orange { background: #92400e; }
+  .av-teal   { background: #0f766e; }
+  .av-pink   { background: #9d174d; }
+  .av-gray   { background: #374151; }
+  .av-indigo { background: #3730a3; }
+  .av-lime   { background: #3f6212; }
+
+  /* CREW DETAIL VIEW */
+  .crew-detail { max-width: 900px; }
+  .back-btn { display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--rb-border); border-radius: 6px; color: var(--rb-muted); font-size: 12px; font-weight: 600; padding: 7px 14px; cursor: pointer; margin-bottom: 28px; transition: all .2s; letter-spacing: .5px; text-transform: uppercase; }
+  .back-btn:hover { border-color: var(--rb-red); color: var(--rb-red); }
+  .crew-hero { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; padding: 24px 28px; background: var(--rb-card); border: 1px solid var(--rb-border); border-radius: 12px; }
+  .crew-hero-avatar { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 26px; color: #fff; flex-shrink: 0; border: 3px solid var(--rb-border); }
+  .crew-hero-name { font-size: 26px; font-weight: 800; color: #fff; }
+  .crew-hero-title { font-size: 13px; color: var(--rb-muted); text-transform: uppercase; letter-spacing: .8px; margin-top: 4px; }
+  .crew-stats { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+  .crew-stat { font-size: 12px; }
+  .crew-stat-label { color: var(--rb-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .8px; display: block; }
+  .crew-stat-value { color: var(--rb-yellow); font-weight: 700; font-size: 15px; }
+
+  /* TIMELINE */
+  .timeline { position: relative; }
+  .timeline-day { margin-bottom: 36px; }
+  .timeline-day-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .timeline-shoots { display: grid; gap: 12px; }
+  .shoot-card { background: var(--rb-card); border: 1px solid var(--rb-border); border-radius: 10px; overflow: hidden; }
+  .shoot-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 12px 16px 10px; border-bottom: 1px solid var(--rb-border); }
+  .shoot-title { font-weight: 700; font-size: 13px; color: #f1f5f9; }
+  .shoot-time { background: #0f172a; border: 1px solid var(--rb-border); border-radius: 6px; padding: 3px 9px; font-size: 11px; color: var(--rb-yellow); white-space: nowrap; font-weight: 600; }
+  .shoot-body { padding: 12px 16px; display: grid; gap: 8px; }
+  .shoot-row { display: flex; gap: 10px; align-items: flex-start; }
+  .shoot-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--rb-muted); min-width: 76px; padding-top: 2px; flex-shrink: 0; }
+  .shoot-val { font-size: 12px; color: var(--rb-text); line-height: 1.5; }
+  .deadline-chip { display: inline-block; background: #2a1f0f; color: #fcd34d; border: 1px solid #d9770630; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin: 2px 2px 2px 0; }
+  .role-chip { display: inline-block; background: #1e1e4d; color: #a5b4fc; border: 1px solid #4338ca30; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin: 2px 2px 2px 0; }
+  .note-chip { background: #0f2a1e; border-left: 3px solid var(--rb-green); border-radius: 0 6px 6px 0; padding: 6px 10px; font-size: 11px; color: #86efac; }
+  .asset-chip { display: inline-block; background: #1a2233; color: #94a3b8; border: 1px solid var(--rb-border); border-radius: 4px; padding: 2px 8px; font-size: 11px; margin: 2px 2px 2px 0; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--rb-border); padding: 18px 40px; color: var(--rb-muted); font-size: 11px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  footer a { color: var(--rb-red); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media(max-width:700px){
+    .site-header,.tab-nav,.main,footer{padding-left:16px;padding-right:16px;}
+    .tasks-grid,.roles-grid{grid-template-columns:1fr;}
+    .crew-stats{gap:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="rb-logo">RB</div>
+  <div class="header-text">
+    <h1>RB Leipzig Tour Week — Content Plan</h1>
+    <p>Johannesburg · Roles, Responsibilities &amp; Schedule</p>
+  </div>
+</header>
+
+<nav class="tab-nav" id="main-nav">
+  <button class="tab-btn active" onclick="showMainView('schedule')">📅 Schedule</button>
+  <button class="tab-btn" onclick="showMainView('roles')">👥 Roles &amp; Responsibilities</button>
+</nav>
+
+<main class="main">
+
+  <!-- ══════════════════════════════════════
+       SCHEDULE VIEW
+  ══════════════════════════════════════ -->
+  <div id="view-schedule" class="view active">
+
+    <div class="notes-banner">
+      <strong>⚠ Standing Notes — Entire Week</strong>
+      Filming BTS all week for Townhall wrapup video — edited by Iconic. &nbsp;|&nbsp;
+      Creators and Yay Abe <em>not</em> to wear clothing with competitive branding. Puma is a partner.
+      <br style="margin-top:6px">
+      <a href="https://miro.com/app/board/uXjVIyiVVKI=/" target="_blank" style="color:#f59e0b;">→ Miro Board</a>
+    </div>
+
+    <!-- TUESDAY -->
+    <div class="day-section">
+      <div class="day-header"><span class="day-pill pill-tuesday">Tuesday</span><div class="day-line"></div></div>
+      <div class="tasks-grid">
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">✈ Airport Arrival</div><div class="task-time">Crew 7:45am · Team 8:30am</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>"Spotted" — arrivals &amp; highway (camera + phone)</li><li>Stills</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Manny</span></div></div>
+            <div class="task-row"><div class="task-label">Deadline</div><div class="task-value"><span class="tag tag-deadline">Spotted — Immediate · Stills — Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Lindiwe</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Wooda</span><span class="tag tag-crew">Manny</span><span class="tag tag-crew">Sundowns Videographer</span><span class="tag tag-crew">Mpume (stills)</span></div></div>
+            <div class="task-row"><div class="task-label">Creators</div><div class="task-value"><span class="tag tag-creator">Dedrick Shoots</span><span class="tag tag-creator">Ling Ling</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span><span class="tag tag-rb">Invite office + Sundowns fans</span></div></div>
+            <div class="notes-tag">🚐 Shuttle pick-up from Hotel at 6:30am</div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🏋 Hyrox Training — Wits</div><div class="task-time">Calltime 13:00 · Session 13:45–14:45</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>Train like a Pro with Matt Stone — 1 min clip</li><li>Stills</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Wooda team</span></div></div>
+            <div class="task-row"><div class="task-label">Deadline</div><div class="task-value"><span class="tag tag-deadline">Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Nate · Lelo · Manny</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Wooda</span><span class="tag tag-crew">Manny</span><span class="tag tag-crew">Mpume</span></div></div>
+            <div class="task-row"><div class="task-label">Creators</div><div class="task-value"><span class="tag tag-creator">Matt Stone</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span><span class="tag tag-rb">Slim can</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🍽 Dinner — Zioux Sandton</div><div class="task-time">Calltime 6pm · Dinner 7–10pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>Townhall clips</li><li>Stills</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Iconic (townhall)</span></div></div>
+            <div class="task-row"><div class="task-label">Deadline</div><div class="task-value"><span class="tag tag-deadline">72hrs after event · Stills — Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Lindiwe</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Wooda</span><span class="tag tag-crew">Mpume</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEDNESDAY -->
+    <div class="day-section">
+      <div class="day-header"><span class="day-pill pill-wednesday">Wednesday</span><div class="day-line"></div></div>
+      <div class="tasks-grid">
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">👕 Jersey Shoot Part 1 — Mary Fitzgerald Square</div><div class="task-time">Crew 12:30pm · Shoot 2–3pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Concept</div><div class="task-value" style="font-size:12px;color:#94a3b8;">Filming the tour jersey with players and creators. Creativity encouraged — Mpume to send references.</div></div>
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>Hero stills — Museum Africa + Mary Fitzgerald Square</li><li>Photographer BTS (Meta glasses POV)</li><li>BTS video (Wooda)</li><li>Dress the Jersey — creators show personal style (Puma)</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editors</div><div class="task-value"><span class="tag tag-editor">Mpume/Wooda</span> (BTS) &nbsp;<span class="tag tag-editor">Wooda</span> (BTS video)</div></div>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Hero Stills — Immediate</span><span class="tag tag-deadline">Dress the Jersey — Next Day</span><span class="tag tag-deadline">Photographer BTS/Video — Week of game</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Kirst · Clarence</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Wooda</span><span class="tag tag-crew">Mpume</span><span class="tag tag-crew">Norbet (filming creators)</span></div></div>
+            <div class="task-row"><div class="task-label">Creators</div><div class="task-value"><span class="tag tag-creator">Manz</span><span class="tag tag-creator">Caddy</span><span class="tag tag-creator">Pamela M</span><span class="tag tag-creator">Sedii Moshouyane</span><span class="tag tag-creator">Kay Mahapa</span><span class="tag tag-creator">Primo</span><span class="tag tag-creator">Maps</span><span class="tag tag-creator">Vaf</span><span class="tag tag-creator">Gio (TBC)</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span><span class="tag tag-rb">Shirts</span><span class="tag tag-rb">Balls</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🎨 Jersey Shoot Part 2 — Art Meets Sport (Studio)</div><div class="task-time">4–5pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Concept</div><div class="task-value" style="font-size:12px;color:#94a3b8;">Soccer meets art — interview with Yay Abe and players in studio. Kirst to align with Yay Abe and Taki on questions.</div></div>
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>Soccer meets art — interview with Yay Abe &amp; players</li><li>Go-pro timelapse of players and Yay Abe creating art</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editors</div><div class="task-value"><span class="tag tag-editor">Iconic</span> (interview) &nbsp;<span class="tag tag-editor">Wooda</span> (go-pro)</div></div>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Soccer meets art — Next Day</span><span class="tag tag-deadline">Go-pro — Immediate</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🎬 Gold Reef City Comedy Skit</div><div class="task-time">Calltime 12:30pm · Shoot 14:15–5pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Concept</div><div class="task-value" style="font-size:12px;color:#94a3b8;">Two taxi drivers become tour guides — unfiltered ride to Gold Reef City. 100% social-first. 4x go-pros mounted to taxi.</div></div>
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>Skit (taxi pick-up to theme park)</li><li>Go-pro reaction POVs on rides x4</li><li>Stills</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editors</div><div class="task-value"><span class="tag tag-editor">Iconic</span> (skit) &nbsp;<span class="tag tag-editor">Wooda</span> (reaction POVs)</div></div>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Skit — 72hrs after game</span><span class="tag tag-deadline">Reaction POVs — Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Lindiwe · Lelo</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Iconic: Director</span><span class="tag tag-crew">Soundman</span><span class="tag tag-crew">2× Camera</span><span class="tag tag-crew">CK</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span><span class="tag tag-rb">Shirts</span><span class="tag tag-rb">Balls</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">💃 Dance Workshop — Pantsula &amp; Amapiano</div><div class="task-time">Calltime 1pm · Shoot 2:30–3:30pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Concept</div><div class="task-value" style="font-size:12px;color:#94a3b8;">Mada and Viper teach RB Leipzig players Pantsula and Amapiano for their goal celebration dance.</div></div>
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>Celebration Dance (with Mada + Viper)</li><li>Match My Move</li><li>Top 3 Trending Amapiano Moves (players ± creators)</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editors</div><div class="task-value"><span class="tag tag-editor">Iconic</span> (celebration) &nbsp;<span class="tag tag-editor">Wooda team</span> (Match My Move, Top 3)</div></div>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Celebration — Immediate</span><span class="tag tag-deadline">Match My Move/Top 3 — Week after game</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Nate · Emmanuel</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Darim</span><span class="tag tag-crew">Manny (2nd camera)</span><span class="tag tag-crew">Wayne Reiche</span></div></div>
+            <div class="task-row"><div class="task-label">Creators</div><div class="task-value"><span class="tag tag-creator">Viper Gunn</span><span class="tag tag-creator">Mada</span><span class="tag tag-creator">Smokey Mirrors</span><span class="tag tag-creator">Thlogi M</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span><span class="tag tag-rb">JBL Speaker</span><span class="tag tag-rb">Can cooler</span><span class="tag tag-rb">DYS branding</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🌍 CSR — Pitch Renovation, Mbolekwa Sports Complex</div><div class="task-time">Calltime 14:30 · Shoot 15:30–16:30</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value">16:9 filming for Townhall · Stills</div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">TBC</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Bongani</span><span class="tag tag-crew">Nobert</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span><span class="tag tag-rb">Coolers</span><span class="tag tag-rb">Umbrellas</span></div></div>
+            <div class="notes-tag">🚌 Shuttle from hotel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THURSDAY -->
+    <div class="day-section">
+      <div class="day-header"><span class="day-pill pill-thursday">Thursday</span><div class="day-line"></div></div>
+      <div class="tasks-grid">
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🚗 Spinning with Sam Sam — Wheelz n Smoke</div><div class="task-time">Calltime 9:30am · Shoot 11am–12pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Setup</div><div class="task-value" style="font-size:12px;color:#94a3b8;">Mount 4x go-pros to car + bonnet. Kirst to call Macaire +27 82 450 3386 (go-pro wrangler).</div></div>
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>1 min clip 9:16 (social)</li><li>1 min clip 16:9 (event screens)</li><li>POV reactions — Player 1, Player 2, Coach</li><li>Shoutout — Sam Sam (halftime show)</li><li>Shoutout — Brian Capper</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editors</div><div class="task-value"><span class="tag tag-editor">Darim</span><span class="tag tag-editor">Bongani</span></div></div>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Social clip — Immediate</span><span class="tag tag-deadline">16:9 — Next day</span><span class="tag tag-deadline">POV reactions — 24hrs after game</span><span class="tag tag-deadline">Shoutouts — Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Kirst · Aya</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Darim</span><span class="tag tag-crew">Bongani</span><span class="tag tag-crew">CK</span><span class="tag tag-crew">Mac (go-pro wrangler)</span></div></div>
+            <div class="task-row"><div class="task-label">Creators</div><div class="task-value"><span class="tag tag-creator">Matthew K</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Umbrellas</span><span class="tag tag-rb">Tables + Chairs</span><span class="tag tag-rb">Cans</span><span class="tag tag-rb">Can Cooler</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🥩 Cultural Exchange Pt 1 — Chesa Nyama, Mamelodi</div><div class="task-time">Calltime 9:30am · Shoot 11am–12:30pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Concept</div><div class="task-value" style="font-size:12px;color:#94a3b8;">Dedrick and Sundowns players give RB Leipzig a Mamelodi experience. Go-pros in shuttle for Dedrick-hosted quiz.</div></div>
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>Long form YouTube (RB Leipzig to edit, Bundesliga collab TBC)</li><li>1 min clip — Braai</li><li>1 min — Tasting a South African Braai for the first time</li><li>1 min clip — Learning to Gwijo</li><li>Go-pros in shuttle (quiz + formats hosted by Dedrick)</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Iconic</span></div></div>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Gwijo — Immediate</span><span class="tag tag-deadline">Braai — Week after game</span><span class="tag tag-deadline">Tasting — 2 weeks after</span><span class="tag tag-deadline">Shuttle quiz — TBC</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Lindiwe <em style="color:#94a3b8;font-size:11px;">(Clarence not needed — transport conflict)</em></div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Wooda</span><span class="tag tag-crew">1× Iconic filmer</span><span class="tag tag-crew">Wayne</span><span class="tag tag-crew">Soundie</span><span class="tag tag-crew">PA</span></div></div>
+            <div class="task-row"><div class="task-label">Creators</div><div class="task-value"><span class="tag tag-creator">Dedrick</span></div></div>
+            <div class="notes-tag">🚌 Shuttle: Dedrick + RBL staff → Creator Day · Players → hotel separately</div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🎶 Cultural Exchange Pt 2 — Gwijo</div><div class="task-time">12:30–1pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Concept</div><div class="task-value" style="font-size:12px;color:#94a3b8;">RB Leipzig team learn to Gwijo. RB Leipzig merch/shirts as gifts for fans.</div></div>
+            <div class="notes-tag">⚡ After this activation, Dedrick heads directly to the Creator Day event.</div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">⚽ 1 PAL</div><div class="task-time">Calltime 12:45 · Shoot 13:45–14:15</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value">Wide-angle action · Fan reactions · Player close-ups · Emotional moments</div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Iconic</span></div></div>
+            <div class="task-row"><div class="task-label">Deadline</div><div class="task-value"><span class="tag tag-deadline">Townhall edit</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Clarence <em style="color:#94a3b8;font-size:11px;">(Kirst to assist securing crew)</em></div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Iconic cameraman</span><span class="tag tag-crew">Nobert</span></div></div>
+            <div class="task-row"><div class="task-label">Creators</div><div class="task-value"><span class="tag tag-creator">Vino*</span></div></div>
+            <div class="notes-tag">🏟 We attend our time slot only — players return to hotel after.</div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🌟 Creator Day</div><div class="task-time">Crew 12:30pm · Training 1:30–3pm · Players 3–5pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Concept</div><div class="task-value" style="font-size:12px;color:#94a3b8;">Creators train like footballers. Lunch → dressing room → drills with 1st team coaches. Keep it natural.</div></div>
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value"><ul class="asset-list"><li>1 min training clip — banter and creators with coaches</li><li>Creators filming own content</li><li>Stills</li></ul></div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Iconic</span></div></div>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Stills — Immediate</span><span class="tag tag-deadline">1 min clip — After game</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Gio · Nate · Lelo</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Iconic cameraman</span><span class="tag tag-crew">Soundman</span><span class="tag tag-crew">Mpume</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🏃 Public Training</div><div class="task-time">6–8pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value">B-roll of drills · Fan format (TBD)</div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Manny</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Manny</span><span class="tag tag-crew">Wooda/Darim</span><span class="tag tag-crew">Mpume</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIDAY PRE-EVENT -->
+    <div class="day-section">
+      <div class="day-header"><span class="day-pill pill-friday-pre">Friday — Pre-Event</span><div class="day-line"></div></div>
+      <div class="tasks-grid">
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🎮 Gaming Nexus Hub</div><div class="task-time">Calltime 9:30 · Shoot 10:30–11:30am</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value">Manny to advise</div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Manny</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Manny</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Manny</span><span class="tag tag-crew">Bongani</span><span class="tag tag-crew">Wayne</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🎙 Press Conference</div><div class="task-time">Calltime 10am · Shoot 11am–12pm</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Deadline</div><div class="task-value"><span class="tag tag-deadline">Stills — Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Taki · Ace</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Darim</span><span class="tag tag-crew">Mpume</span></div></div>
+            <div class="task-row"><div class="task-label">Red Bull</div><div class="task-value"><span class="tag tag-rb">Cans</span><span class="tag tag-rb">Baby cooler</span></div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🧢 Athlete Capping</div><div class="task-time">TBC</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Assets</div><div class="task-value">1 min clip of handing cap · Stills</div></div>
+            <div class="task-row"><div class="task-label">Editor</div><div class="task-value"><span class="tag tag-editor">Wooda team</span></div></div>
+            <div class="task-row"><div class="task-label">Deadline</div><div class="task-value"><span class="tag tag-deadline">Stills — Immediate</span><span class="tag tag-deadline">Clip — Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Nate</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Wooda</span><span class="tag tag-crew">CK</span><span class="tag tag-crew">Mpume</span><span class="tag tag-crew">Ty</span><span class="tag tag-crew">Wayne</span></div></div>
+            <div class="notes-tag">📌 Align with Seth and Nate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIDAY EVENT -->
+    <div class="day-section">
+      <div class="day-header"><span class="day-pill pill-friday-ev">Friday — Event</span><div class="day-line"></div></div>
+      <div class="tasks-grid">
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🎉 Event Coverage</div><div class="task-time">Full event</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Zone Leads</div><div class="task-value">
+              <div style="display:grid;gap:4px;font-size:12px;">
+                <div><strong style="color:#94a3b8;">UGC:</strong> Lelo · Aya</div>
+                <div><strong style="color:#94a3b8;">Partners:</strong> Mbali · Kirst</div>
+                <div><strong style="color:#94a3b8;">Photography:</strong> Kirst</div>
+                <div><strong style="color:#94a3b8;">ENG Team:</strong> Lindz</div>
+                <div><strong style="color:#94a3b8;">Broadcast:</strong> Ange · Lindz</div>
+                <div><strong style="color:#94a3b8;">Creator Zone:</strong> Gio</div>
+                <div><strong style="color:#94a3b8;">Media Zone:</strong> Taki · Ace</div>
+                <div><strong style="color:#94a3b8;">Tebogo Cap:</strong> Nate</div>
+              </div>
+            </div></div>
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">ALL</div></div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🏆 Tebogo Cap Moment</div><div class="task-time">During event</div></div>
+          <div class="task-body">
+            <div class="task-row"><div class="task-label">Responsible</div><div class="task-value">Nate</div></div>
+            <div class="task-row"><div class="task-label">Crew</div><div class="task-value"><span class="tag tag-crew">Wooda</span><span class="tag tag-crew">Photographer</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME DAY -->
+    <div class="day-section">
+      <div class="day-header"><span class="day-pill pill-gameday">Game Day</span><div class="day-line"></div></div>
+      <div class="tasks-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🔴 Pre-Game Deliverables</div></div>
+          <div class="task-body"><ul class="asset-list"><li>Tunnel walk — both teams</li><li>Warm-ups</li><li>Interviews</li><li>Fan moments</li><li>Players walking out of bus</li><li>Dressing room moments</li><li>Player pitch walk</li><li>Any special moments</li></ul></div>
+        </div>
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">⚽ In-Game Deliverables</div></div>
+          <div class="task-body">
+            <ul class="asset-list" style="margin-bottom:8px"><li>Highlights (TBD on day)</li><li>Goals · Celebration dances · Fan moments</li></ul>
+            <div class="task-row"><div class="task-label">Deadlines</div><div class="task-value"><span class="tag tag-deadline">Instant goal clips — Immediate</span><span class="tag tag-deadline">First-half highlights — Immediate</span><span class="tag tag-deadline">Full-match — Immediate</span><span class="tag tag-deadline">Top plays — Immediate</span></div></div>
+            <div class="task-row"><div class="task-label">Also</div><div class="task-value" style="font-size:12px;">Player highlight reels · Man of the Match · Bloopers</div></div>
+          </div>
+        </div>
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">🎪 Half-Time Show</div></div>
+          <div class="task-body"><ul class="asset-list"><li>Individual moments</li><li>16:9 format</li><li>9:16 format</li></ul></div>
+        </div>
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">📋 Post-Game</div></div>
+          <div class="task-body"><ul class="asset-list"><li>Post interviews</li><li>Newscut</li><li>Social newscut</li></ul></div>
+        </div>
+        <div class="task-card">
+          <div class="task-card-header"><div class="task-title">💡 Game Day Content Formats</div></div>
+          <div class="task-body">
+            <ul class="asset-list" style="margin-bottom:8px"><li>Individual moments · Fan reactions · Bloopers</li><li>Sound dB Meter (graphic on goal)</li><li>Sound levels — fans, locker room, ball kick</li><li>Go-pro on referee chest</li><li>Creators + Players commentate 2 mins</li></ul>
+            <div class="task-row"><div class="task-label">Editors</div><div class="task-value"><span class="tag tag-editor">Moonsport</span><span class="tag tag-editor">Wooda team</span><span class="tag tag-editor">UGC editor</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /view-schedule -->
+
+
+  <!-- ══════════════════════════════════════
+       ROLES VIEW
+  ══════════════════════════════════════ -->
+  <div id="view-roles" class="view">
+    <div class="notes-banner">
+      <strong>Click any card to view full schedule</strong>
+      Each person's card links to their personal day-by-day schedule with full shoot details.
+    </div>
+    <div class="roles-grid" id="roles-grid"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       CREW DETAIL VIEW
+  ══════════════════════════════════════ -->
+  <div id="view-crew" class="view">
+    <div class="crew-detail">
+      <button class="back-btn" onclick="goBack()">← Back to Roles</button>
+      <div id="crew-detail-content"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>RB Leipzig Tour Week · Johannesburg · Content Plan</span>
+  <a href="https://miro.com/app/board/uXjVIyiVVKI=/" target="_blank">→ Miro Board</a>
+</footer>
+
+<script>
+/* ────────────────────────────────────────
+   CREW DATA
+──────────────────────────────────────── */
+const crew = [
+  {
+    id: 'mpume',
+    name: 'Mpume',
+    initials: 'MP',
+    av: 'av-red',
+    title: 'Stills Photographer · BTS Editor',
+    summary: ['6 shoots across 4 days', 'Heaviest stills workload on tour'],
+    days: [
+      { day: 'Tuesday', cls: 'pill-tuesday', shoots: [
+        { time: '7:45am calltime', title: '✈ Airport Arrival', role: 'Stills photographer', assets: ['Stills — Immediate'], note: 'Shuttle pick-up from Hotel at 6:30am' },
+        { time: '13:00 calltime · 13:45–14:45', title: '🏋 Hyrox Training — Wits', role: 'Stills photographer', assets: ['Stills'] },
+        { time: '6pm calltime · 7–10pm', title: '🍽 Dinner — Zioux Sandton', role: 'Stills photographer', assets: ['Stills — Immediate'] },
+      ]},
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm crew calltime · 2–3pm', title: '👕 Jersey Shoot Pt 1 — Mary Fitzgerald Square', role: 'Hero stills photographer · BTS editor (w/ Wooda) · Dress the Jersey editor (w/ Wooda)', assets: ['Hero stills — Immediate', 'Dress the Jersey — Next Day', 'Photographer BTS — Week of game'], note: '⚠ Send shoot references to KD before Wednesday. Norbet helps by filming creators.' },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '12:30pm crew calltime', title: '🌟 Creator Day', role: 'Stills photographer', assets: ['Stills — Immediate'] },
+        { time: '6–8pm', title: '🏃 Public Training', role: 'Filming crew (w/ Manny / Wooda / Darim)', assets: ['B-roll of drills'] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: '10am calltime · 11am–12pm', title: '🎙 Press Conference', role: 'Stills photographer', assets: ['Stills — Immediate'] },
+        { time: 'TBC', title: '🧢 Athlete Capping', role: 'Stills + crew (w/ Wooda / CK / Ty / Wayne)', assets: ['Stills — Immediate', 'Clip — Immediate'], note: 'Align with Seth and Nate' },
+      ]},
+    ]
+  },
+  {
+    id: 'wooda',
+    name: 'Wooda / Wooda Team',
+    initials: 'WD',
+    av: 'av-blue',
+    title: 'Lead Videographer · Editor',
+    summary: ['On all 6 days including Game Day', 'Primary edit team for social clips'],
+    days: [
+      { day: 'Tuesday', cls: 'pill-tuesday', shoots: [
+        { time: '7:45am calltime', title: '✈ Airport Arrival', role: 'Filming — camera + phone', assets: ['Spotted clip (edit: Manny)'] },
+        { time: '13:00 calltime', title: '🏋 Hyrox Training — Wits', role: 'Filming + editing 1 min clip', assets: ['1 min clip — Immediate', 'Stills support'] },
+        { time: '6pm calltime', title: '🍽 Dinner — Zioux Sandton', role: 'Filming', assets: ['Townhall clips (edit: Iconic)'] },
+      ]},
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm crew calltime', title: '👕 Jersey Shoot Pt 1 — Mary Fitzgerald Square', role: 'BTS video filming · BTS editor (w/ Mpume) · Dress the Jersey editor (w/ Mpume)', assets: ['BTS video — Week of game', 'Dress the Jersey — Next Day'] },
+        { time: '4–5pm', title: '🎨 Jersey Shoot Pt 2 — Art Meets Sport', role: 'Go-pro timelapse filming + edit', assets: ['Go-pro timelapse — Immediate'] },
+        { time: '12:30pm calltime', title: '🎬 Gold Reef City Comedy Skit', role: 'Reaction POV filming + edit', assets: ['Reaction POVs — Immediate'] },
+        { time: '1pm calltime · 2:30–3:30pm', title: '💃 Dance Workshop', role: 'Match My Move + Top 3 edit', assets: ['Match My Move — Week after game', 'Top 3 Amapiano moves — Week after game'] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime · 11am–12:30pm', title: '🥩 Chesa Nyama, Mamelodi', role: 'Filming (w/ 1× Iconic filmer)', assets: ['Long form content (Iconic edit)', 'B-roll'] },
+        { time: '6–8pm', title: '🏃 Public Training', role: 'Filming (w/ Darim)', assets: ['B-roll of drills'] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: 'TBC', title: '🧢 Athlete Capping', role: 'Filming + editing 1 min clip', assets: ['Clip — Immediate'] },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'During event', title: '🏆 Tebogo Cap Moment', role: 'Filming', assets: ['Clip'] },
+      ]},
+      { day: 'Game Day', cls: 'pill-gameday', shoots: [
+        { time: 'Full match day', title: '⚽ In-Game Coverage', role: 'Filming + editing multiple deliverables', assets: ['Instant goal clips — Immediate', 'First-half highlights — Immediate', 'Full-match highlights — Immediate', 'Top plays — Immediate', 'Player highlight reels', 'Man of the Match', 'Bloopers'] },
+      ]},
+    ]
+  },
+  {
+    id: 'manny',
+    name: 'Manny',
+    initials: 'MN',
+    av: 'av-orange',
+    title: 'Camera · Editor · Tech Lead (Go-pro)',
+    summary: ['Lead on Gaming Nexus Hub', 'Bring extra go-pro to JHB'],
+    days: [
+      { day: 'Tuesday', cls: 'pill-tuesday', shoots: [
+        { time: '7:45am calltime', title: '✈ Airport Arrival', role: 'Filming + editing "Spotted" clip', assets: ['Spotted — Immediate'], note: 'Bring extra go-pro to JHB' },
+        { time: '13:00 calltime', title: '🏋 Hyrox Training — Wits', role: 'Filming (responsible with Nate/Lelo)', assets: ['Stills + 1 min clip support'] },
+      ]},
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '1pm calltime · 2:30–3:30pm', title: '💃 Dance Workshop', role: 'Second camera', assets: ['B-roll support'] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '6–8pm', title: '🏃 Public Training', role: 'Filming + responsible', assets: ['B-roll'] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: '9:30am calltime · 10:30–11:30am', title: '🎮 Gaming Nexus Hub', role: 'Filming + editing + responsible for this shoot', assets: ['Manny to advise'] },
+      ]},
+    ]
+  },
+  {
+    id: 'darim',
+    name: 'Darim / Darem',
+    initials: 'DR',
+    av: 'av-teal',
+    title: 'Camera Operator · Editor',
+    summary: ['Lead camera on Spinning shoot', 'Paired with Bongani for editing'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '1pm calltime · 2:30–3:30pm', title: '💃 Dance Workshop', role: 'Camera operator', assets: ['B-roll'] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime · 11am–12pm', title: '🚗 Spinning with Sam Sam', role: 'Filming + editing main social clip + 16:9', assets: ['Social clip 9:16 — Immediate', '16:9 for screens — Next day'] },
+        { time: '6–8pm', title: '🏃 Public Training', role: 'Filming (w/ Wooda)', assets: ['B-roll'] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: '10am calltime · 11am–12pm', title: '🎙 Press Conference', role: 'Camera operator', assets: ['Footage for stills support'] },
+      ]},
+    ]
+  },
+  {
+    id: 'bongani',
+    name: 'Bongani',
+    initials: 'BG',
+    av: 'av-green',
+    title: 'Camera Operator · Editor',
+    summary: ['Editing partner with Darim on Spinning', 'CSR project crew lead'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '14:30 calltime · 15:30–16:30', title: '🌍 CSR — Pitch Renovation, Mbolekwa', role: 'Filming', assets: ['16:9 footage for Townhall'] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime · 11am–12pm', title: '🚗 Spinning with Sam Sam', role: 'Filming + editing POV reactions', assets: ['POV reactions — 24hrs after game'] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: '9:30am calltime · 10:30–11:30am', title: '🎮 Gaming Nexus Hub', role: 'Filming', assets: ['B-roll'] },
+      ]},
+    ]
+  },
+  {
+    id: 'lindiwe',
+    name: 'Lindiwe / Lindz',
+    initials: 'LW',
+    av: 'av-purple',
+    title: 'Project Lead (MN) · ENG + Broadcast',
+    summary: ['Responsible across 5 major shoots', 'ENG + Broadcast lead on event day'],
+    days: [
+      { day: 'Tuesday', cls: 'pill-tuesday', shoots: [
+        { time: '7:45am calltime', title: '✈ Airport Arrival', role: 'Responsible MN', assets: [] },
+        { time: '6pm calltime', title: '🍽 Dinner — Zioux Sandton', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm calltime', title: '🎬 Gold Reef City Comedy Skit', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime · 11am–12:30pm', title: '🥩 Chesa Nyama / Gwijo', role: 'Responsible MN (Clarence not needed — transport conflict)', assets: [] },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'ENG team lead · Broadcast co-lead (w/ Ange)', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'kirst',
+    name: 'Kirst',
+    initials: 'KI',
+    av: 'av-pink',
+    title: 'Production Coordinator · Partners · Event Photography',
+    summary: ['Key coordinator for Wed & Thu shoots', 'Must call Macaire re: go-pro wrangler'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm crew calltime', title: '👕 Jersey Shoot Pt 1 — Mary Fitzgerald Square', role: 'Responsible MN', assets: [], note: 'Align with Yay Abe + Taki on studio interview questions' },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime · 11am–12pm', title: '🚗 Spinning with Sam Sam', role: 'Responsible MN · Call Macaire +27 82 450 3386 (go-pro wrangler)', assets: [] },
+        { time: '12:45 calltime', title: '⚽ 1 PAL', role: 'Assist Clarence in securing crew (1 camera + 1 stills)', assets: [] },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'Event photography · Partners management (w/ Mbali)', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'nate',
+    name: 'Nate',
+    initials: 'NT',
+    av: 'av-indigo',
+    title: 'Management (MN) · Creator Day Lead',
+    summary: ['Responsible across 5 shoots', 'Leads Tebogo cap moment at event'],
+    days: [
+      { day: 'Tuesday', cls: 'pill-tuesday', shoots: [
+        { time: '13:00 calltime', title: '🏋 Hyrox Training — Wits', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '1pm calltime', title: '💃 Dance Workshop', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '12:30pm crew calltime', title: '🌟 Creator Day', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: 'TBC', title: '🧢 Athlete Capping', role: 'Responsible MN', assets: [], note: 'Align with Seth before shoot' },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'During event', title: '🏆 Tebogo Cap Moment', role: 'Responsible MN', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'lelo',
+    name: 'Lelo',
+    initials: 'LL',
+    av: 'av-lime',
+    title: 'Management (MN) · UGC',
+    summary: ['Management on 3 shoots', 'UGC capture at event day'],
+    days: [
+      { day: 'Tuesday', cls: 'pill-tuesday', shoots: [
+        { time: '13:00 calltime', title: '🏋 Hyrox Training — Wits', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm calltime', title: '🎬 Gold Reef City Comedy Skit', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '12:30pm crew calltime', title: '🌟 Creator Day', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'UGC capture (w/ Aya)', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'gio',
+    name: 'Gio',
+    initials: 'GI',
+    av: 'av-teal',
+    title: 'Creator Liaison · Creator Zone Lead',
+    summary: ['Creator wrangling Wednesday', 'Owns creator zone at event'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm crew calltime', title: '👕 Jersey Shoot Pt 1 — Mary Fitzgerald Square', role: 'Creator coordination (TBC — confirming)', assets: [] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '12:30pm crew calltime', title: '🌟 Creator Day', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'Creator zone management', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'clarence',
+    name: 'Clarence',
+    initials: 'CL',
+    av: 'av-gray',
+    title: 'Production Coordinator',
+    summary: ['Responsible for Jersey Shoot + 1 PAL', 'Not attending Chesa Nyama — transport conflict'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm crew calltime', title: '👕 Jersey Shoot Pt 1 — Mary Fitzgerald Square', role: 'Responsible MN', assets: [] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '12:45 calltime · 13:45–14:15', title: '⚽ 1 PAL', role: 'Responsible MN (Kirst assisting with crew)', assets: [], note: 'NOT attending Chesa Nyama — transport conflict with calltime' },
+      ]},
+    ]
+  },
+  {
+    id: 'taki-ace',
+    name: 'Taki · Ace',
+    initials: 'TA',
+    av: 'av-blue',
+    title: 'Media & Press Management',
+    summary: ['Press Conference leads', 'Media zone at event'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: 'Pre-shoot prep', title: '🎨 Jersey Shoot Pt 2 — Art Meets Sport', role: 'Align with Kirst on Yay Abe interview questions', assets: [] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: '10am calltime · 11am–12pm', title: '🎙 Press Conference', role: 'Responsible MN', assets: ['Stills — Immediate'] },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'Media zone management', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'iconic',
+    name: 'Iconic',
+    initials: 'IC',
+    av: 'av-red',
+    title: 'Production Company — Filming & Editing',
+    summary: ['Editing partner for Townhall + long-form', 'Director on Gold Reef City skit'],
+    days: [
+      { day: 'Tuesday', cls: 'pill-tuesday', shoots: [
+        { time: '6pm calltime', title: '🍽 Dinner — Zioux Sandton', role: 'Townhall edit', assets: ['Townhall clips — 72hrs after event'] },
+      ]},
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '4–5pm', title: '🎨 Jersey Shoot Pt 2 — Art Meets Sport', role: 'Soccer meets art interview — filming + edit', assets: ['Soccer meets art — Next day'] },
+        { time: '12:30pm calltime · 14:15–5pm', title: '🎬 Gold Reef City Comedy Skit', role: 'Director + crew (Director, Soundman, 2× cameramen, CK)', assets: ['Comedy Skit — 72hrs after game'] },
+        { time: '1pm calltime', title: '💃 Dance Workshop', role: 'Celebration dance filming + edit', assets: ['Celebration dance — Immediate'] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime · 11am–12:30pm', title: '🥩 Chesa Nyama, Mamelodi', role: '1× Iconic filmer', assets: ['Long form YouTube (RB Leipzig edits)', '1 min clips per format'] },
+        { time: '12:45 calltime', title: '⚽ 1 PAL', role: 'Filming', assets: ['Townhall edit footage'] },
+        { time: '12:30pm crew calltime', title: '🌟 Creator Day', role: 'Filming + 1 min clip edit', assets: ['1 min clip — After game'] },
+      ]},
+      { day: 'All week', cls: 'pill-gameday', shoots: [
+        { time: 'Ongoing', title: '🎥 BTS Townhall Wrapup Video', role: 'Filming BTS all week for final Townhall edit', assets: ['Townhall wrapup video'] },
+      ]},
+    ]
+  },
+  {
+    id: 'wayne',
+    name: 'Wayne Reiche',
+    initials: 'WR',
+    av: 'av-gray',
+    title: 'Camera Operator',
+    summary: ['3 shoots across Wed–Fri', 'Camera support across multiple crews'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '1pm calltime · 2:30–3:30pm', title: '💃 Dance Workshop', role: 'Camera operator', assets: [] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime', title: '🥩 Chesa Nyama, Mamelodi', role: 'Filming', assets: [] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: '9:30am calltime · 10:30–11:30am', title: '🎮 Gaming Nexus Hub', role: 'Filming', assets: [] },
+        { time: 'TBC', title: '🧢 Athlete Capping', role: 'Filming', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'ck',
+    name: 'CK',
+    initials: 'CK',
+    av: 'av-gray',
+    title: 'Production Crew',
+    summary: ['3 shoots across 3 days', 'Key crew on Gold Reef City skit'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm calltime · 14:15–5pm', title: '🎬 Gold Reef City Comedy Skit', role: 'Crew', assets: [] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime · 11am–12pm', title: '🚗 Spinning with Sam Sam', role: 'Crew', assets: [] },
+      ]},
+      { day: 'Friday — Pre-Event', cls: 'pill-friday-pre', shoots: [
+        { time: 'TBC', title: '🧢 Athlete Capping', role: 'Crew', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'nobert',
+    name: 'Nobert',
+    initials: 'NB',
+    av: 'av-gray',
+    title: 'Camera Assist',
+    summary: ['Assists Mpume by filming creators', 'Covers CSR + 1 PAL'],
+    days: [
+      { day: 'Wednesday', cls: 'pill-wednesday', shoots: [
+        { time: '12:30pm crew calltime', title: '👕 Jersey Shoot Pt 1 — Mary Fitzgerald Square', role: 'Filming creators (assisting Mpume)', assets: [] },
+        { time: '14:30 calltime · 15:30–16:30', title: '🌍 CSR — Mbolekwa Sports Complex', role: 'Filming', assets: ['16:9 footage for Townhall'] },
+      ]},
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '12:45 calltime · 13:45–14:15', title: '⚽ 1 PAL', role: 'Filming', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'aya',
+    name: 'Aya',
+    initials: 'AY',
+    av: 'av-pink',
+    title: 'UGC · Production Assist',
+    summary: ['Co-responsible on Spinning shoot', 'UGC at event with Lelo'],
+    days: [
+      { day: 'Thursday', cls: 'pill-thursday', shoots: [
+        { time: '9:30am calltime', title: '🚗 Spinning with Sam Sam', role: 'Responsible MN (w/ Kirst)', assets: [] },
+      ]},
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'UGC capture (w/ Lelo)', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'mbali',
+    name: 'Mbali',
+    initials: 'MB',
+    av: 'av-purple',
+    title: 'Partners Management',
+    summary: ['Partners management at event day'],
+    days: [
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'Partners management (w/ Kirst)', assets: [] },
+      ]},
+    ]
+  },
+  {
+    id: 'ange',
+    name: 'Ange',
+    initials: 'AN',
+    av: 'av-teal',
+    title: 'Broadcast',
+    summary: ['Broadcast co-lead at event (with Lindz)'],
+    days: [
+      { day: 'Friday — Event', cls: 'pill-friday-ev', shoots: [
+        { time: 'Full event', title: '🎉 Event Coverage', role: 'Broadcast co-lead (w/ Lindz)', assets: [] },
+      ]},
+    ]
+  },
+];
+
+/* ────────────────────────────────────────
+   STATE
+──────────────────────────────────────── */
+let previousView = 'roles';
+
+/* ────────────────────────────────────────
+   RENDER ROLES GRID
+──────────────────────────────────────── */
+function renderRoles() {
+  const grid = document.getElementById('roles-grid');
+  grid.innerHTML = crew.map(c => {
+    const totalShoots = c.days.reduce((sum, d) => sum + d.shoots.length, 0);
+    const dayNames = c.days.map(d => d.day).join(' · ');
+    return `
+    <div class="role-card" onclick="showCrew('${c.id}')">
+      <div class="role-header">
+        <div class="role-avatar ${c.av}">${c.initials}</div>
+        <div>
+          <div class="role-name">${c.name}</div>
+          <div class="role-title">${c.title}</div>
+        </div>
+        <div class="role-arrow">›</div>
+      </div>
+      <div class="role-body">
+        <div style="display:flex;gap:16px;margin-bottom:12px;">
+          <div><span class="crew-stat-label">Shoots</span><span class="crew-stat-value" style="font-size:20px;">${totalShoots}</span></div>
+          <div><span class="crew-stat-label">Days on set</span><span class="crew-stat-value" style="font-size:20px;">${c.days.length}</span></div>
+        </div>
+        <div style="font-size:11px;color:var(--rb-muted);margin-bottom:10px;">${dayNames}</div>
+        ${c.summary.map(s => `<div class="duty-item">${s}</div>`).join('')}
+        <div class="view-link" style="margin-top:12px;">View full schedule →</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ────────────────────────────────────────
+   RENDER CREW DETAIL
+──────────────────────────────────────── */
+function showCrew(id) {
+  const c = crew.find(x => x.id === id);
+  if (!c) return;
+  previousView = 'roles';
+
+  const totalShoots = c.days.reduce((sum, d) => sum + d.shoots.length, 0);
+
+  let html = `
+    <div class="crew-hero">
+      <div class="crew-hero-avatar ${c.av}">${c.initials}</div>
+      <div>
+        <div class="crew-hero-name">${c.name}</div>
+        <div class="crew-hero-title">${c.title}</div>
+        <div class="crew-stats">
+          <div class="crew-stat"><span class="crew-stat-label">Total shoots</span><span class="crew-stat-value">${totalShoots}</span></div>
+          <div class="crew-stat"><span class="crew-stat-label">Days on set</span><span class="crew-stat-value">${c.days.length}</span></div>
+          ${c.summary.map(s => `<div class="crew-stat"><span class="crew-stat-label">Note</span><span style="font-size:12px;color:#cbd5e1;">${s}</span></div>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="timeline">`;
+
+  c.days.forEach(day => {
+    html += `
+      <div class="timeline-day">
+        <div class="timeline-day-header">
+          <span class="day-pill ${day.cls}">${day.day}</span>
+          <div class="day-line"></div>
+          <span style="font-size:11px;color:var(--rb-muted);white-space:nowrap;">${day.shoots.length} shoot${day.shoots.length > 1 ? 's' : ''}</span>
+        </div>
+        <div class="timeline-shoots">`;
+
+    day.shoots.forEach(s => {
+      html += `
+          <div class="shoot-card">
+            <div class="shoot-card-top">
+              <div class="shoot-title">${s.title}</div>
+              ${s.time ? `<div class="shoot-time">${s.time}</div>` : ''}
+            </div>
+            <div class="shoot-body">
+              <div class="shoot-row">
+                <div class="shoot-label">Role</div>
+                <div class="shoot-val"><span class="role-chip">${s.role}</span></div>
+              </div>`;
+      if (s.assets && s.assets.length > 0) {
+        html += `
+              <div class="shoot-row">
+                <div class="shoot-label">Deliverables</div>
+                <div class="shoot-val">${s.assets.map(a => `<span class="deadline-chip">${a}</span>`).join('')}</div>
+              </div>`;
+      }
+      if (s.note) {
+        html += `
+              <div class="note-chip">📌 ${s.note}</div>`;
+      }
+      html += `
+            </div>
+          </div>`;
+    });
+
+    html += `
+        </div>
+      </div>`;
+  });
+
+  html += `</div>`;
+
+  document.getElementById('crew-detail-content').innerHTML = html;
+
+  // Switch to crew view
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-crew').classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  window.scrollTo(0, 0);
+}
+
+/* ────────────────────────────────────────
+   NAVIGATION
+──────────────────────────────────────── */
+function showMainView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  event.target.classList.add('active');
+  previousView = name;
+}
+
+function goBack() {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + previousView).classList.add('active');
+  // Restore active tab
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.textContent.toLowerCase().includes(previousView === 'schedule' ? 'schedule' : 'role')) {
+      b.classList.add('active');
+    }
+  });
+  window.scrollTo(0, 0);
+}
+
+/* ────────────────────────────────────────
+   INIT
+──────────────────────────────────────── */
+renderRoles();
+</script>
+</body>
+</html>
